@@ -1,30 +1,22 @@
-module.exports = function Lockons_light(dispatch) {
+module.exports = function lockonsLight(dispatch) {
+	let cache = {};
+	var currentZone = -1;
 	
-	let cache = [];
-	let cache_size = 60;
-	
-	dispatch.hook('C_CAN_LOCKON_TARGET', function(event) {
-		if(cache.includes(event.target.toString()))
-		{
-			dispatch.toClient('S_CAN_LOCKON_TARGET', Object.assign({ ok: true }, event));
-		}
+	// If we enter a new zone, clear the cache
+	dispatch.hook('S_LOAD_TOPO', 2, e=>{
+		if(e.zone != currentZone)
+			cache = {};
+		currentZone = e.zone;
 	});
 	
+	// Client wants to know if he(yes i just assumed the gender) can lockon to the target
+	dispatch.hook('C_CAN_LOCKON_TARGET', function(event) {
+		if(cache[event.target.toString()])
+			dispatch.toClient('S_CAN_LOCKON_TARGET', Object.assign({ ok: true }, event));
+	});
+	
+	// We're getting information regarding the lockon status from the server
 	dispatch.hook('S_CAN_LOCKON_TARGET', function(event) {
-		if(!cache.includes(event.target.toString()))
-		{
-			if(event.ok)
-			{
-				if(cache.length >= cache_size)
-				{
-					cache.pop();
-				}
-				cache.unshift(event.target.toString());
-			}
-		}
-		else if(!event.ok) // cached object became untargetable
-		{
-			cache.splice(cache.indexOf(event.target.toString()), 1);
-		}
+		cache[event.target.toString()] = event.ok;
 	});
 };
