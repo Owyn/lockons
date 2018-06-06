@@ -12,7 +12,7 @@ module.exports = function lockonsLight(dispatch) {
 	// Client wants to know if he(yes i just assumed the gender) can lockon to the target
 	dispatch.hook('C_CAN_LOCKON_TARGET', 1, function(event) {
 		if(cache[event.target.toString()])
-			dispatch.toClient('S_CAN_LOCKON_TARGET', Object.assign({ ok: true }, event));
+			dispatch.toClient('S_CAN_LOCKON_TARGET', 1, Object.assign({ ok: true }, event));
 	});
 	
 	// We're getting information regarding the lockon status from the server
