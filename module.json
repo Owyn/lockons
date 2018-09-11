@@ -1,0 +1,5 @@
+{
+	"disableAutoUpdate": false,
+	"servers": ["https://raw.githubusercontent.com/Owyn/lockons-light/master/"],
+	"supportUrl": "https://github.com/Owyn/lockons-light/issues"
+}

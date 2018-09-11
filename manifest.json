@@ -1,0 +1,12 @@
+{
+	"files": {
+		"README.md": "75affcdd1d75be267c7b70618d8b6767f8342b3aeb3453ba70f210620c8a74e6",
+		"index.js": "62ea1f717a0b098b4f3970babb25d265ec51c0abe03181801fe4bb93e9bdae79",
+		"module.json": "4c7b9faf44829a0c0a77cc19fe8ed483d477da9e399b5f1e9ca05c776777fafa"
+	},
+	"defs": {
+		"C_CAN_LOCKON_TARGET": 3,
+		"S_CAN_LOCKON_TARGET": 3,
+		"S_LOAD_TOPO": 3
+	}
+}
